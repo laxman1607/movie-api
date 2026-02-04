@@ -1,10 +1,10 @@
-# ---------- Build Stage ----------
+# -------- Build Stage --------
 FROM gradle:8.7-jdk17 AS build
 WORKDIR /app
 COPY . .
-RUN gradle clean :app:build -x test
+RUN gradle clean build -x test
 
-# ---------- Run Stage ----------
+# -------- Run Stage --------
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/app/build/libs/*.jar app.jar
